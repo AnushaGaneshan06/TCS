@@ -6,12 +6,21 @@ set /p STUDENT_NAME=Enter your full name:
 set /p GITHUB_USERNAME=Enter your GitHub username: 
 set /p REPO_NAME=Enter your GitHub repo name: 
 
+REM ==== Check if Git repo exists ====
+if not exist ".git" (
+    echo.
+    echo Initializing git repository...
+    git init
+    git branch -M main
+    git remote add origin https://github.com/%GITHUB_USERNAME%/%REPO_NAME%.git
+)
+
 REM ==== Push Code to GitHub ====
 echo.
 echo Pushing your code to GitHub...
 git add .
 git commit -m "Submission by %STUDENT_NAME%"
-git push origin main
+git push -u origin main
 
 REM ==== Send Submission to Backend ====
 echo.
